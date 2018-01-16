@@ -1,8 +1,9 @@
-import utils;
-import state;
-import sys;
 import string;
+import sys;
 
+from photo_categoriser import state;
+
+from utils.file_handling import file_utils
 
 COMMAND_FORWARD = "f"
 COMMAND_BACK = "b"
@@ -60,7 +61,7 @@ def isANumber(input):
 def doDel(state) :
     #remove a file
     fileToRemove = state.currentFile
-    utils.removefile(state.sourcePath, fileToRemove)
+    file_utils.removefile(state.sourcePath, fileToRemove)
     if(state.fileRemoved() == False) :
         print("Removed: " + fileToRemove)
         printCurrentFile(state.currentFile)
@@ -75,7 +76,7 @@ def doMove(state, userInput) :
     #move the current file to the folder specified by the key that the user has given
     fileToMove = state.currentFile
     destDir = state.getMappingFor(userInput)
-    utils.moveFile(state.sourcePath, fileToMove, destDir)
+    file_utils.moveFile(state.sourcePath, fileToMove, destDir)
     if(state.fileRemoved() == False):
         print("Moved: " + fileToMove + " to " + destDir)
         printCurrentFile(state.currentFile)
@@ -96,7 +97,7 @@ def doBack(state) :
 
 def doMake(state, dirName):
     #Create a folder and a key for it
-    print("New mapping: " + state.addMapping(utils.makeDir(state.destPath, dirName)))
+    print("New mapping: " + state.addMapping(file_utils.makeDir(state.destPath, dirName)))
     printCurrentFile(state.currentFile)
 
 def doListMappings(state):
@@ -125,8 +126,8 @@ def showImage(image):
 
 if __name__ == "__main__":
 
-    #Get the config file and build a State instance from it
-    state = state.State(sys.argv[1])
+    #Get the config file and build a state instance from it
+    state = state.state(sys.argv[1])
 
     #Build a dictionary of commands e.g. 'f', 'b', mapped to their appropriate functions
     actions = {}

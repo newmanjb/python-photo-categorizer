@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/photo_categoriser/photo_categoriser.iml" filepath="$PROJECT_DIR$/photo_categoriser/photo_categoriser.iml" />
-      <module fileurl="file://$PROJECT_DIR$/photo_categoriser_utils/photo_categoriser_utils.iml" filepath="$PROJECT_DIR$/photo_categoriser_utils/photo_categoriser_utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/pythonStuff.iml" filepath="$PROJECT_DIR$/pythonStuff.iml" />
     </modules>
   </component>

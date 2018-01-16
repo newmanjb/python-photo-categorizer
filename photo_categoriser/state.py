@@ -1,11 +1,11 @@
-import utils
+from utils.file_handling import file_utils
 
 """Represents the current state of the photo categorizer e.g. which photo in the list is currently being displayed and
    what key-folder mappings does the user have.  This class is also responsible for saving and reading the state to and
    from the config file.
 """
 
-class State:
+class state:
 
     def fileRemoved(self):
         #Tells the state instance that the current file has been removed
@@ -79,8 +79,8 @@ class State:
         self.sourcePath=configMap["sourcePath"]
         self.destPath=configMap["destPath"]
 
-        files = utils.getFiles(self.sourcePath, ".JPG")
-        files.extend(utils.getFiles(self.sourcePath, ".jpg"))
+        files = file_utils.getFiles(self.sourcePath, ".JPG")
+        files.extend(file_utils.getFiles(self.sourcePath, ".jpg"))
         if(len(files) == 0):
             print("NO FILES FOUND IN " + self.sourcePath + "  EXITING ...")
             exit(0);
