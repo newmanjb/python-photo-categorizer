@@ -59,8 +59,8 @@ def isANumber(input):
         return False
 
 def doDel(state) :
-    #remove a file
-    fileToRemove = state.currentFile
+    """remove a file"""
+    fileToRemove = state.currentFile[0]
     file_utils.removefile(state.sourcePath, fileToRemove)
     if(state.fileRemoved() == False) :
         print("Removed: " + fileToRemove)
@@ -73,8 +73,8 @@ def doDel(state) :
 
 
 def doMove(state, userInput) :
-    #move the current file to the folder specified by the key that the user has given
-    fileToMove = state.currentFile
+    """move the current file to the folder specified by the key that the user has given"""
+    fileToMove = state.currentFile[0]
     destDir = state.getMappingFor(userInput)
     file_utils.moveFile(state.sourcePath, fileToMove, destDir)
     if(state.fileRemoved() == False):
@@ -86,43 +86,41 @@ def doMove(state, userInput) :
         exit(0)
 
 def doForward(state) :
-    #move forward in the list
+    """move forward in the list"""
     state.incrementCtr()
     printCurrentFile(state.currentFile)
 
 def doBack(state) :
-    #move backward in the list
+    """move backward in the list"""
     state.decrementCtr()
     printCurrentFile(state.currentFile)
 
 def doMake(state, dirName):
-    #Create a folder and a key for it
+    """Create a folder and a key for it"""
     print("New mapping: " + state.addMapping(file_utils.makeDir(state.destPath, dirName)))
     printCurrentFile(state.currentFile)
 
 def doListMappings(state):
-    #Print a list of current mappings e.g. 1=C:/photos/Summer_Of_69, where 1 will be the key
+    """Print a list of current mappings e.g. 1=C:/photos/Summer_Of_69, where 1 will be the key"""
     print("\n".join(state.listMappings()));
     printCurrentFile(state.currentFile)
 
 def doHelp(state):
-    #Print the commands and what they do
+    """Print the commands and what they do"""
     print("\n".join(["'f' - forward", "'b' - back", "'d' - delete", "'your new folder name' - create a key-folder mapping e.g. 'Holiday_August_2016'",
                      "'your mapping key' - move to folder under that key e.g. '2'", "'exit' - Quit", "'l' - list mappings", "'help' - list commands"]))
     printCurrentFile(state.currentFile)
 
 def format_filename(s):
-    #Remove invalid characters from a proposed folder name
+    """Remove invalid characters from a proposed folder name"""
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     filename = ''.join(c for c in s if c in valid_chars)
     filename = filename.replace(' ','_') # I don't like spaces in filenames.
     return filename
 
-def printCurrentFile(filename):
-    print("Current file: ", filename)
+def printCurrentFile(currentFile):
+    print("Current File: ", currentFile[0], ", Date Created: ", currentFile[1])
 
-def showImage(image):
-    image.show()
 
 if __name__ == "__main__":
 
